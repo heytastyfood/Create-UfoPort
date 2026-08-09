@@ -47,12 +47,25 @@ public abstract class EntityMixin implements EntityExtensions {
 
 	@Inject(at = @At("TAIL"), method = "<init>")
 	public void port_lib$entityInit(EntityType<?> entityType, Level world, CallbackInfo ci) {
-		EntityDimensions dims = ((Entity)((Object)this)).getDimensions(this.getPose());
+		// This runs at the TAIL of Entity's own constructor, BEFORE any subclass
+		// constructor bodies. getDimensions() is a virtual call, and subclass
+		// overrides may dereference fields that are not initialized yet
+		// (e.g. Cobblemon's PokemonEntity.getDimensions -> this.effects NPE,
+		// which made every saved Pokemon fail to load from chunk NBT and be
+		// discarded). Vanilla/NeoForge never virtual-call getDimensions from the
+		// ctor, so a subclass throwing here is not a bug in that mod — guard it
+		// and fall back to vanilla dimensions.
+		EntityDimensions dims;
+		try {
+			dims = ((Entity)((Object)this)).getDimensions(this.getPose());
+		} catch (Throwable t) {
+			return;
+		}
 		if(dims == null) {
 			return;
 		}
 		float eye = dims.eyeHeight();
-		((Entity)((Object)this)).getDimensions(this.getPose()).withEyeHeight(EntityEvents.EYE_HEIGHT.invoker().onEntitySize((Entity) (Object) this, eye));
+		dims.withEyeHeight(EntityEvents.EYE_HEIGHT.invoker().onEntitySize((Entity) (Object) this, eye));
 	}
 
 	@WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/EntityDimensions;eyeHeight()F"))
