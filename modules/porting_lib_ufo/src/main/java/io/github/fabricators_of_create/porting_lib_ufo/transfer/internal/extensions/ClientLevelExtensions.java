@@ -7,11 +7,11 @@ import net.minecraft.core.BlockPos;
 
 @Internal
 public interface ClientLevelExtensions {
-	default void port_lib$registerCache(BlockPos pos, ClientBlockApiCache cache) {
+	default void port_lib_ufo$registerCache(BlockPos pos, ClientBlockApiCache cache) {
 		throw new RuntimeException("this should be overridden via mixin. what?");
 	}
 
-	default void port_lib$invalidateCache(BlockPos pos) {
+	default void port_lib_ufo$invalidateCache(BlockPos pos) {
 		throw new RuntimeException("this should be overridden via mixin. what?");
 	}
 }

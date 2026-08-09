@@ -13,7 +13,7 @@ import net.minecraft.client.resources.model.ModelBaker;
 import java.util.function.Function;
 
 public interface BlockModelExtensions {
-	default ItemOverrides getOverrides(ModelBaker pModelBakery, BlockModel pModel, Function<Material, TextureAtlasSprite> textureGetter) {
+	default ItemOverrides port_lib_ufo$getOverrides(ModelBaker pModelBakery, BlockModel pModel, Function<Material, TextureAtlasSprite> textureGetter) {
 		throw new RuntimeException("this should be overridden via mixin. what?");
 	}
 

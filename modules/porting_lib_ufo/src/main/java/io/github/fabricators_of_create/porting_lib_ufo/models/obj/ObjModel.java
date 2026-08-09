@@ -200,9 +200,9 @@ public class ObjModel implements IUnbakedGeometry<ObjModel>, UnbakedModel {
 			quadBaker.material(shadeQuads ? defaultMaterial : diffuseMaterial);
 		}
 
-		boolean hasTransform = !transform.isIdentity();
+		boolean hasTransform = !transform.port_lib_ufo$isIdentity();
 		// The incoming transform is referenced on the center of the block, but our coords are referenced on the corner
-		Transformation transformation = hasTransform ? transform.blockCenterToCorner() : transform;
+		Transformation transformation = hasTransform ? transform.port_lib_ufo$blockCenterToCorner() : transform;
 
 		Vector4f[] pos = new Vector4f[4];
 		Vector3f[] norm = new Vector3f[4];
@@ -216,8 +216,8 @@ public class ObjModel implements IUnbakedGeometry<ObjModel>, UnbakedModel {
 			Vector4f color = index.length >= 4 && colors.size() > 0 ? colors.get(index[3]) : COLOR_WHITE;
 			if (hasTransform) {
 				normal = new Vector3f(norm0);
-				transformation.transformPosition(position);
-				transformation.transformNormal(normal);
+				transformation.port_lib_ufo$transformPosition(position);
+				transformation.port_lib_ufo$transformNormal(normal);
 			}
 			Vector4f tintedColor = new Vector4f(
 					color.x() * colorTint.x(),
@@ -402,7 +402,7 @@ public class ObjModel implements IUnbakedGeometry<ObjModel>, UnbakedModel {
 			Vector4f colorTint = mat.diffuseColor;
 
 			var rootTransform = owner != null ? owner.getRootTransform() : Transformation.identity();
-			var transform = rootTransform.isIdentity() ? modelTransform.getRotation() : modelTransform.getRotation().compose(rootTransform);
+			var transform = rootTransform.port_lib_ufo$isIdentity() ? modelTransform.getRotation() : modelTransform.getRotation().compose(rootTransform);
 			for (int[][] face : faces) {
 				makeQuad(meshBuilder, face, tintIndex, colorTint, mat.ambientColor, texture, transform);
 			}

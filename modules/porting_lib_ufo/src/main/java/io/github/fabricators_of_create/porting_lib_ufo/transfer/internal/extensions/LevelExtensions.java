@@ -12,11 +12,11 @@ import net.minecraft.core.Direction;
 
 @Internal
 public interface LevelExtensions {
-	default BlockApiCache<Storage<ItemVariant>, Direction> port_lib$getItemCache(BlockPos pos) {
+	default BlockApiCache<Storage<ItemVariant>, Direction> port_lib_ufo$getItemCache(BlockPos pos) {
 		throw new RuntimeException("this should be overridden via mixin. what?");
 	}
 
-	default BlockApiCache<Storage<FluidVariant>, Direction> port_lib$getFluidApiCache(BlockPos pos) {
+	default BlockApiCache<Storage<FluidVariant>, Direction> port_lib_ufo$getFluidApiCache(BlockPos pos) {
 		throw new RuntimeException("this should be overridden via mixin. what?");
 	}
 }

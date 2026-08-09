@@ -17,13 +17,13 @@ import io.github.fabricators_of_create.porting_lib_ufo.transfer.internal.extensi
 @Mixin(Level.class)
 public abstract class LevelMixin implements LevelExtensions {
 	@Override
-	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib$getItemCache(BlockPos pos) {
+	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib_ufo$getItemCache(BlockPos pos) {
 		// uh oh. Not a ClientLevel or ServerLevel!
 		return new EmptyItemLookupCache(pos);
 	}
 
 	@Override
-	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib$getFluidApiCache(BlockPos pos) {
+	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib_ufo$getFluidApiCache(BlockPos pos) {
 		// uh oh. Not a ClientLevel or ServerLevel!
 		return new EmptyFluidLookupCache(pos);
 	}

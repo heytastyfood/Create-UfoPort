@@ -68,7 +68,7 @@ public class StorageProvider<T> implements Function<Direction, Storage<T>> {
 	 * Create a storage provider for {@link FluidStorage#SIDED fluids}.
 	 */
 	public static StorageProvider<FluidVariant> createForFluids(Level level, BlockPos pos) {
-		BlockApiCache<Storage<FluidVariant>, Direction> cache = ((LevelExtensions) level).port_lib$getFluidApiCache(pos);
+		BlockApiCache<Storage<FluidVariant>, Direction> cache = ((LevelExtensions) level).port_lib_ufo$getFluidApiCache(pos);
 		if (cache instanceof EmptyFluidLookupCache)
 			return create(FluidStorage.SIDED, level, pos);
 		return create(cache, level);
@@ -78,7 +78,7 @@ public class StorageProvider<T> implements Function<Direction, Storage<T>> {
 	 * Create a storage provider for {@link ItemStorage#SIDED items}.
 	 */
 	public static StorageProvider<ItemVariant> createForItems(Level level, BlockPos pos) {
-		BlockApiCache<Storage<ItemVariant>, Direction> cache = ((LevelExtensions) level).port_lib$getItemCache(pos);
+		BlockApiCache<Storage<ItemVariant>, Direction> cache = ((LevelExtensions) level).port_lib_ufo$getItemCache(pos);
 		if (cache instanceof EmptyItemLookupCache)
 			return create(ItemStorage.SIDED, level, pos);
 		return create(cache, level);

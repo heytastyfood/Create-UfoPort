@@ -39,7 +39,7 @@ public class ClientFluidLookupCache implements BlockApiCache<Storage<FluidVarian
 	}
 
 	public ClientFluidLookupCache(ClientLevel world, BlockPos pos) {
-		((ClientLevelExtensions) world).port_lib$registerCache(pos ,this);
+		((ClientLevelExtensions) world).port_lib_ufo$registerCache(pos ,this);
 		this.world = world;
 		this.pos = pos.immutable();
 	}

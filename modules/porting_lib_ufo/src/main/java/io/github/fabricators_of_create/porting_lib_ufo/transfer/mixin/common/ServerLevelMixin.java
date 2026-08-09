@@ -17,12 +17,12 @@ import io.github.fabricators_of_create.porting_lib_ufo.transfer.internal.extensi
 @Mixin(ServerLevel.class)
 public class ServerLevelMixin implements LevelExtensions {
 	@Override
-	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib$getItemCache(BlockPos pos) {
+	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib_ufo$getItemCache(BlockPos pos) {
 		return BlockApiCache.create(ItemStorage.SIDED, ((ServerLevel) (Object) this), pos);
 	}
 
 	@Override
-	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib$getFluidApiCache(BlockPos pos) {
+	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib_ufo$getFluidApiCache(BlockPos pos) {
 		return BlockApiCache.create(FluidStorage.SIDED, ((ServerLevel) (Object) this), pos);
 	}
 }

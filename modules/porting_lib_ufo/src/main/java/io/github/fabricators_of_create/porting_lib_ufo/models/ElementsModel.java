@@ -46,7 +46,7 @@ public class ElementsModel implements IUnbakedGeometry<ElementsModel> {
 		QuadEmitter emitter = meshBuilder.getEmitter();
 		var postTransform = QuadTransformers.empty();
 		var rootTransform = context.getRootTransform();
-		if (!rootTransform.isIdentity())
+		if (!rootTransform.port_lib_ufo$isIdentity())
 			postTransform = UnbakedGeometryHelper.applyRootTransform(modelState, rootTransform);
 
 		for (BlockElement element : elements) {
@@ -62,7 +62,7 @@ public class ElementsModel implements IUnbakedGeometry<ElementsModel> {
 				if (face.cullForDirection() == null)
 					modelBuilder.addUnculledFace(quad);
 				else
-					modelBuilder.addCulledFace(modelState.getRotation().rotateTransform(face.cullForDirection()), quad);
+					modelBuilder.addCulledFace(modelState.getRotation().port_lib_ufo$rotateTransform(face.cullForDirection()), quad);
 			}
 		}
 		return modelBuilder.build();

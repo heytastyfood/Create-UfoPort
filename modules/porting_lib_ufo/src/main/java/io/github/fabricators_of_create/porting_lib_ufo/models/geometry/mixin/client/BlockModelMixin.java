@@ -55,7 +55,7 @@ public class BlockModelMixin implements BlockModelExtensions {
 								   ModelState modelTransform, boolean guiLight3d, CallbackInfoReturnable<BakedModel> cir) {
 		IUnbakedGeometry<?> geometry = getCustomGeometry();
 		if (geometry != null) {
-			ItemOverrides overrides = getOverrides(modelBaker, ownerModel, spriteGetter);
+			ItemOverrides overrides = port_lib_ufo$getOverrides(modelBaker, ownerModel, spriteGetter);
 			cir.setReturnValue(geometry.bake(
 					(BlockModel) (Object) this, modelBaker, spriteGetter, modelTransform, overrides, null, guiLight3d
 			));
@@ -69,7 +69,7 @@ public class BlockModelMixin implements BlockModelExtensions {
 	}
 
 	@Override
-	public ItemOverrides getOverrides(ModelBaker p_250138_, BlockModel p_251800_, Function<Material, TextureAtlasSprite> spriteGetter) {
+	public ItemOverrides port_lib_ufo$getOverrides(ModelBaker p_250138_, BlockModel p_251800_, Function<Material, TextureAtlasSprite> spriteGetter) {
 		return this.overrides.isEmpty() ? ItemOverrides.EMPTY : new ItemOverrides(p_250138_, p_251800_, this.overrides/*, spriteGetter*/);
 	}
 

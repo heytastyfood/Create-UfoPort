@@ -51,7 +51,7 @@ public class CompositeModel implements IUnbakedGeometry<CompositeModel> {
 		TextureAtlasSprite particle = spriteGetter.apply(particleLocation);
 
 		var rootTransform = context.getRootTransform();
-		if (!rootTransform.isIdentity()) {
+		if (!rootTransform.port_lib_ufo$isIdentity()) {
 			modelState = UnbakedGeometryHelper.composeRootTransformIntoModelState(modelState, rootTransform);
 		}
 

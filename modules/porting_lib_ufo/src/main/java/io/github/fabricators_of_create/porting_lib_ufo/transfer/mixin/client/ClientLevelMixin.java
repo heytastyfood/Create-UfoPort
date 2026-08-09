@@ -36,7 +36,7 @@ public class ClientLevelMixin implements LevelExtensions, ClientLevelExtensions 
 	private int port_lib$apiLookupAccessesWithoutCleanup = 0;
 
 	@Override
-	public void port_lib$invalidateCache(BlockPos pos) {
+	public void port_lib_ufo$invalidateCache(BlockPos pos) {
 		List<WeakReference<ClientBlockApiCache>> caches = port_lib$apiLookupCaches.get(pos);
 
 		if (caches != null) {
@@ -69,7 +69,7 @@ public class ClientLevelMixin implements LevelExtensions, ClientLevelExtensions 
 	}
 
 	@Override
-	public void port_lib$registerCache(BlockPos pos, ClientBlockApiCache cache) {
+	public void port_lib_ufo$registerCache(BlockPos pos, ClientBlockApiCache cache) {
 		List<WeakReference<ClientBlockApiCache>> caches = port_lib$apiLookupCaches.computeIfAbsent(pos.immutable(), ignored -> new ArrayList<>());
 		caches.removeIf(weakReference -> weakReference.get() == null);
 		caches.add(new WeakReference<>(cache));
@@ -77,12 +77,12 @@ public class ClientLevelMixin implements LevelExtensions, ClientLevelExtensions 
 	}
 
 	@Override
-	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib$getItemCache(BlockPos pos) {
+	public BlockApiCache<Storage<ItemVariant>, Direction> port_lib_ufo$getItemCache(BlockPos pos) {
 		return ClientItemLookupCache.get(((ClientLevel) (Object) this), pos);
 	}
 
 	@Override
-	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib$getFluidApiCache(BlockPos pos) {
+	public BlockApiCache<Storage<FluidVariant>, Direction> port_lib_ufo$getFluidApiCache(BlockPos pos) {
 		return ClientFluidLookupCache.get(((ClientLevel) (Object) this), pos);
 	}
 }
