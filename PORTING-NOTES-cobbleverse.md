@@ -12,9 +12,9 @@
 - Supplementaries 3.6.7 ships Create-compat recipes gated only on
   `fabric:mod_loaded create`, referencing `create:cardboard` (a Create 6.x item;
   this port is the 0.5 line -> item absent). 3 parse ERRORs at boot
-  (`supplementaries:present_2`, `trapped_present_2` recipes + advancements).
+  (recipes `supplementaries:present_2` + `trapped_present_3`, advancement `present_2`).
   Fixed on the server with world datapack
-  `labworld/datapacks/ufoport-supplementaries-compat-fix/` overriding those 4
+  `labworld/datapacks/ufoport-supplementaries-compat-fix/` overriding those 3
   files with a never-true `fabric:load_conditions`, so they are skipped cleanly.
   A robust in-jar fix is not possible: mod-datapack override ordering between
   mods is not deterministic, and registering a `create:cardboard` item would
