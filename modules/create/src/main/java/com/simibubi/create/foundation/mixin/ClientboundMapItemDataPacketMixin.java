@@ -81,6 +81,16 @@ public class ClientboundMapItemDataPacketMixin {
 
 		        @Override
 		        public void encode(ByteBuf buffer, int[] value) {
+		        	// create$stationIndices is only populated by the @Inject on the
+		        	// (MapId, byte, boolean, Collection, MapPatch) constructor. 1.21 made
+		        	// this packet a record, and anything built through the canonical
+		        	// (MapId, byte, boolean, Optional, Optional) constructor never runs that
+		        	// injector, leaving the field null. Encoding then NPE'd on value.length
+		        	// and killed the connection -- a player holding an affected map was
+		        	// disconnected on every login, permanently. (2026-08-12)
+		        	if (value == null) {
+		        		value = new int[0];
+		        	}
 		        	VarInt.write(buffer, value.length);
 		        	for(int i=0;i<value.length;i++) {
 		        		VarInt.write(buffer, value[i]);
@@ -89,7 +99,10 @@ public class ClientboundMapItemDataPacketMixin {
 		};
 		
 		StreamCodec<RegistryFriendlyByteBuf, ClientboundMapItemDataPacket> codec = StreamCodec.composite(
-				INT_ARRAY, obj -> ((ClientboundMapItemDataPacketMixin)(Object)obj).create$stationIndices,
+				INT_ARRAY, obj -> {
+					int[] indices = ((ClientboundMapItemDataPacketMixin)(Object)obj).create$stationIndices;
+					return indices == null ? new int[0] : indices;
+				},
 				MapId.STREAM_CODEC, ClientboundMapItemDataPacket::mapId, 
 				ByteBufCodecs.BYTE, ClientboundMapItemDataPacket::scale, 
 				ByteBufCodecs.BOOL, ClientboundMapItemDataPacket::locked, 
